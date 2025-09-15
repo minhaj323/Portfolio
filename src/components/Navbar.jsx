@@ -1,11 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Link } from "react-scroll";
-import logo from '../assets/logo.png';
-
+import logo from "../assets/logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navItems = [
     { id: "hero", label: "Home" },
@@ -15,22 +23,28 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-gray-900 text-white sticky top-0 z-50 shadow-md">
+    <nav
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-black/90 backdrop-blur-md shadow-lg border-b border-gray-800"
+          : "bg-black"
+      } text-white`}
+    >
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        {/* Logo */}
+        {/* Logo + Name */}
         <div className="flex items-center gap-2 cursor-pointer">
-  <img
-    src={logo}
-    alt="Logo"
-    className="h-10 w-auto object-contain"
-  />
-  <span className="text-2xl font-extrabold text-indigo-500 tracking-wide">
-    
-  </span>
-</div>
+          <img
+            src={logo}
+            alt="Logo"
+            className="h-10 w-auto object-contain"
+          />
+          <span className="text-xl md:text-2xl font-bold text-indigo-400 tracking-wide">
+            Minhaj Ahmad
+          </span>
+        </div>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex gap-8 text-lg">
+        <ul className="hidden md:flex gap-8 text-lg font-medium">
           {navItems.map((item) => (
             <li key={item.id}>
               <Link
@@ -38,7 +52,7 @@ const Navbar = () => {
                 smooth={true}
                 duration={500}
                 offset={-70}
-                className="hover:text-indigo-400 transition duration-200 cursor-pointer"
+                className="hover:text-indigo-400 transition-colors duration-200 cursor-pointer"
               >
                 {item.label}
               </Link>
@@ -57,7 +71,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-gray-800 px-6 py-4 space-y-4 text-lg">
+        <div className="md:hidden bg-black border-t border-gray-800 px-6 py-4 space-y-4 text-lg">
           {navItems.map((item) => (
             <Link
               key={item.id}
@@ -65,7 +79,7 @@ const Navbar = () => {
               smooth={true}
               duration={500}
               offset={-70}
-              className="block hover:text-indigo-400 transition cursor-pointer"
+              className="block hover:text-indigo-400 transition-colors duration-200 cursor-pointer"
               onClick={() => setIsOpen(false)}
             >
               {item.label}

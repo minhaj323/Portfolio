@@ -13,7 +13,7 @@ const Projects = () => {
       title: "Portfolio Website",
       description:
         "A personal portfolio to showcase my skills and projects, built with React.js and Tailwind CSS.",
-      link: "#", // tum apna portfolio ka repo link daal sakte ho
+      link: "#",
     },
     {
       title: "Landing Page",
@@ -24,27 +24,29 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="py-20 px-6 md:px-20 bg-white text-center">
-      <h2 className="text-4xl font-bold mb-12 text-gray-800 relative inline-block">
+    <section id="projects" className="py-20 px-6 md:px-20 bg-black text-center text-white">
+      {/* Heading */}
+      <h2 className="text-4xl font-bold mb-12 text-indigo-400 relative inline-block">
         My Projects
         <span className="absolute left-1/2 -bottom-2 w-16 h-1 bg-indigo-500 rounded-md transform -translate-x-1/2"></span>
       </h2>
 
+      {/* Project Cards */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
         {projects.map((project, index) => (
           <div
             key={index}
-            className="p-6 bg-gray-50 border rounded-xl shadow-sm hover:shadow-lg transition transform hover:-translate-y-1"
+            className="p-6 bg-gray-900 text-white border border-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2"
           >
-            <h3 className="text-2xl font-semibold mb-3 text-indigo-600">
+            <h3 className="text-2xl font-semibold mb-3 text-indigo-400">
               {project.title}
             </h3>
-            <p className="text-gray-700 mb-4">{project.description}</p>
+            <p className="text-gray-300 mb-6">{project.description}</p>
             <a
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-white bg-indigo-600 px-4 py-2 rounded-lg hover:bg-indigo-700 transition"
+              className="inline-flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition transform hover:scale-105"
             >
               <Github size={18} /> View Code
             </a>

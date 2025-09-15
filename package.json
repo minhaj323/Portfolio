@@ -2,16 +2,20 @@
   "name": "portfolio",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://minhaj323.github.io/portfolio",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.13",
     "emailjs-com": "^3.2.0",
+    "gh-pages": "^6.3.0",
     "lucide-react": "^0.544.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
